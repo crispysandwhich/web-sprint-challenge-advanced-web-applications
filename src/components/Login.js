@@ -1,5 +1,5 @@
 import React, { useEffect , useState} from "react";
-import axios from "axios";
+import axiosWithAuth from '../auth/axiosWithAuth'
 
 const credentials = {
   username: "",
@@ -12,6 +12,7 @@ const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
 
+
   const onChangeHandle = (e) => {
     const { name, value } = e.target;
     setBabyCredials({
@@ -23,7 +24,7 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    axios.post('http://localhost:5000/api/login', babyCreditals)
+    axiosWithAuth().post('/api/login', babyCreditals)
       .then(res => {
         console.log(res.data)
         localStorage.setItem('token', res.data.payload)
